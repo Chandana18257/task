@@ -1,4 +1,4 @@
 FROM tomcat:9-jdk17
-COPY target/*.war /usr/local/tomcat/webapps/
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8084
-CMD["catalina.sh","run"]
+CMD ["catalina.sh","run"]
