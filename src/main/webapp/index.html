@@ -1,248 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Savana Notes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flipkart Clone</title>
 <style>
   :root {
-    --bg: #f6f7fb;
-    --panel: #fff;
-    --muted: #6b7280;
-    --accent: #6c5ce7;
-    --danger: #ef4444;
-    --shadow: 0 6px 18px rgba(20,22,39,0.06);
-    --radius: 12px;
+    --blue: #2874f0;
+    --light-gray: #f1f3f6;
+    --dark: #212121;
+    --muted: #878787;
   }
-  [data-theme="dark"] {
-    --bg: #0b1020;
-    --panel: #0f1724;
-    --muted: #96a0b4;
-    --accent: #7c6cff;
-    --danger: #ff6b6b;
-    color: #e6eef8;
-  }
-
-  html,body {
-    height: 100%;
+  body {
     margin: 0;
-    font-family: Inter, system-ui, sans-serif;
-    background: var(--bg);
-    color: #0b1220;
+    font-family: "Poppins", Arial, sans-serif;
+    background: var(--light-gray);
   }
 
-  .app {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 16px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .sidebar {
-    background: var(--panel);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 60px);
-  }
-
-  .header {
+  /* Header */
+  header {
+    background: var(--blue);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 40px;
   }
-
   .logo {
+    font-size: 22px;
     font-weight: 700;
-    color: var(--accent);
-    font-size: 20px;
+    letter-spacing: 1px;
   }
-
-  .theme-btn {
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 400px;
   }
-
-  .note-list {
+  .search-bar input {
     flex: 1;
-    overflow-y: auto;
-    margin-top: 12px;
-  }
-
-  .note-item {
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 6px;
-  }
-
-  .note-item:hover {
-    background: rgba(0,0,0,0.04);
-  }
-
-  .note-item.active {
-    background: rgba(108,92,231,0.15);
-  }
-
-  .new-note {
-    background: var(--accent);
+    padding: 8px;
     border: none;
+    outline: none;
+  }
+  .search-bar button {
+    background: var(--blue);
     color: white;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    margin-top: 10px;
-  }
-
-  .editor {
-    background: var(--panel);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 60px);
-  }
-
-  .editor input {
-    font-size: 18px;
-    font-weight: 700;
     border: none;
-    outline: none;
-    background: transparent;
-    margin-bottom: 10px;
-  }
-
-  .editor textarea {
-    flex: 1;
-    resize: none;
-    border: none;
-    outline: none;
-    font-family: monospace;
-    font-size: 14px;
-    background: transparent;
-  }
-
-  .editor .actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  .btn {
     padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
     cursor: pointer;
-    font-weight: 600;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
   }
 
-  .save-btn { background: var(--accent); color: white; }
-  .delete-btn { background: var(--danger); color: white; }
+  /* Banner */
+  .banner {
+    width: 100%;
+    height: 280px;
+    background: url('https://source.unsplash.com/1600x400/?shopping,mall') center/cover no-repeat;
+    border-radius: 6px;
+    margin: 20px auto;
+    max-width: 1200px;
+  }
 
-  @media (max-width: 900px) {
-    .app { grid-template-columns: 1fr; }
-    .editor { height: auto; }
+  /* Categories */
+  .categories {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    border-radius: 6px;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px 10px;
+  }
+  .cat-item {
+    text-align: center;
+    cursor: pointer;
+  }
+  .cat-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  .cat-item span {
+    display: block;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* Product grid */
+  .section {
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+  .section h2 {
+    margin: 10px;
+    color: var(--dark);
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .product {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  .product:hover {
+    transform: scale(1.04);
+  }
+  .product img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .product h3 {
+    font-size: 16px;
+    margin: 10px 0 6px;
+  }
+  .price {
+    color: #388e3c;
+    font-weight: 600;
+  }
+  .old-price {
+    color: var(--muted);
+    text-decoration: line-through;
+    font-size: 13px;
+  }
+  .add-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Cart */
+  #cartPanel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  #cartPanel.active {
+    transform: translateX(0);
+  }
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .cart-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+  .cart-item span {
+    font-size: 14px;
+  }
+  .checkout-btn {
+    background: var(--blue);
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  footer {
+    background: var(--blue);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
   }
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="sidebar">
-    <div class="header">
-      <div class="logo">Savana</div>
-      <button class="theme-btn" id="themeBtn">🌙</button>
-    </div>
-    <div class="note-list" id="noteList"></div>
-    <button class="new-note" id="newNoteBtn">+ New Note</button>
+<header>
+  <div class="logo">Flipkart Clone</div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for products, brands and more..." />
+    <button onclick="searchProducts()">🔍</button>
   </div>
+  <div class="nav-links">
+    <a href="#" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</a>
+    <a href="#">Login</a>
+    <a href="#">Become a Seller</a>
+  </div>
+</header>
 
-  <div class="editor">
-    <input type="text" id="noteTitle" placeholder="Note title..." />
-    <textarea id="noteBody" placeholder="Write something..."></textarea>
-    <div class="actions">
-      <button class="btn save-btn" id="saveBtn">💾 Save</button>
-      <button class="btn delete-btn" id="deleteBtn">🗑 Delete</button>
-    </div>
-  </div>
+<div class="banner"></div>
+
+<div class="categories">
+  <div class="cat-item"><img src="https://source.unsplash.com/100x100/?mobile" alt=""><span>Mobiles</span></div>
+  <div class="cat-item"><img src="https://source.unsplash.com/100x100/?laptop" alt=""><span>Electronics</span></div>
+  <div class="cat-item"><img src="https://source.unsplash.com/100x100/?shoes" alt=""><span>Fashion</span></div>
+  <div class="cat-item"><img src="https://source.unsplash.com/100x100/?home" alt=""><span>Home</span></div>
+  <div class="cat-item"><img src="https://source.unsplash.com/100x100/?grocery" alt=""><span>Grocery</span></div>
 </div>
 
+<div class="section">
+  <h2>Best Deals for You</h2>
+  <div class="products" id="productList"></div>
+</div>
+
+<div id="cartPanel">
+  <h3>Your Cart 🛒</h3>
+  <div id="cartItems"></div>
+  <hr>
+  <button class="checkout-btn" onclick="checkout()">Checkout</button>
+</div>
+
+<footer>
+  © 2025 Flipkart Clone | Made with ❤️ using HTML, CSS, JS
+</footer>
+
 <script>
-  const list = document.getElementById('noteList');
-  const newBtn = document.getElementById('newNoteBtn');
-  const saveBtn = document.getElementById('saveBtn');
-  const deleteBtn = document.getElementById('deleteBtn');
-  const titleInput = document.getElementById('noteTitle');
-  const bodyInput = document.getElementById('noteBody');
-  const themeBtn = document.getElementById('themeBtn');
-  const body = document.body;
+  const products = [
+    { id: 1, name: "iPhone 15 Pro", price: 124999, old: 139999, img: "https://source.unsplash.com/400x400/?iphone" },
+    { id: 2, name: "Samsung Galaxy S24", price: 84999, old: 99999, img: "https://source.unsplash.com/400x400/?samsung-phone" },
+    { id: 3, name: "HP Laptop 14s", price: 55999, old: 62999, img: "https://source.unsplash.com/400x400/?laptop" },
+    { id: 4, name: "Nike Sneakers", price: 4999, old: 6999, img: "https://source.unsplash.com/400x400/?sneakers" },
+    { id: 5, name: "Sony Headphones", price: 7999, old: 9999, img: "https://source.unsplash.com/400x400/?headphones" },
+    { id: 6, name: "Smart LED TV", price: 34999, old: 39999, img: "https://source.unsplash.com/400x400/?smart-tv" }
+  ];
 
-  let notes = JSON.parse(localStorage.getItem('savana_notes') || '[]');
-  let currentId = null;
+  const list = document.getElementById('productList');
+  const cartPanel = document.getElementById('cartPanel');
+  const cartItemsDiv = document.getElementById('cartItems');
+  const cartCount = document.getElementById('cartCount');
+  let cart = [];
 
-  function renderList() {
+  function renderProducts(pList = products) {
     list.innerHTML = '';
-    notes.forEach((n) => {
+    pList.forEach(p => {
       const div = document.createElement('div');
-      div.className = 'note-item' + (n.id === currentId ? ' active' : '');
-      div.textContent = n.title || 'Untitled';
-      div.onclick = () => select(n.id);
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <div><span class="price">₹${p.price}</span> <span class="old-price">₹${p.old}</span></div>
+        <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+      `;
       list.appendChild(div);
     });
   }
 
-  function select(id) {
-    currentId = id;
-    const note = notes.find((n) => n.id === id);
-    titleInput.value = note.title;
-    bodyInput.value = note.body;
-    renderList();
+  function addToCart(id) {
+    const item = products.find(p => p.id === id);
+    cart.push(item);
+    updateCart();
+    alert(item.name + " added to cart!");
   }
 
-  newBtn.onclick = () => {
-    const id = Date.now();
-    const newNote = { id, title: 'New Note', body: '' };
-    notes.push(newNote);
-    currentId = id;
-    localStorage.setItem('savana_notes', JSON.stringify(notes));
-    renderList();
-    select(id);
-  };
+  function updateCart() {
+    cartItemsDiv.innerHTML = '';
+    cart.forEach(c => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `<img src="${c.img}" alt=""><span>${c.name}</span>`;
+      cartItemsDiv.appendChild(div);
+    });
+    cartCount.textContent = cart.length;
+  }
 
-  saveBtn.onclick = () => {
-    if (!currentId) return;
-    const note = notes.find((n) => n.id === currentId);
-    note.title = titleInput.value.trim();
-    note.body = bodyInput.value.trim();
-    localStorage.setItem('savana_notes', JSON.stringify(notes));
-    renderList();
-    alert('Note saved ✅');
-  };
+  function toggleCart() {
+    cartPanel.classList.toggle('active');
+  }
 
-  deleteBtn.onclick = () => {
-    if (!currentId) return;
-    notes = notes.filter((n) => n.id !== currentId);
-    localStorage.setItem('savana_notes', JSON.stringify(notes));
-    titleInput.value = '';
-    bodyInput.value = '';
-    currentId = null;
-    renderList();
-  };
+  function checkout() {
+    if (cart.length === 0) alert("Cart is empty!");
+    else alert("Thank you for shopping with Flipkart Clone!");
+  }
 
-  themeBtn.onclick = () => {
-    const dark = body.dataset.theme === 'dark';
-    body.dataset.theme = dark ? '' : 'dark';
-    themeBtn.textContent = dark ? '🌙' : '☀️';
-  };
+  function searchProducts() {
+    const term = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+    renderProducts(filtered);
+  }
 
-  renderList();
+  renderProducts();
 </script>
 </body>
 </html>
